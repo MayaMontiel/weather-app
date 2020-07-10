@@ -60,12 +60,13 @@ function displayTemp(response) {
   celTemp = Math.round(response.data.main.temp);
   maxtemp = Math.round(response.data.main.temp_max);
   mintemp = Math.round(response.data.main.temp_min);
+  realfeeltemp = Math.round(response.data.main.feels_like);
 
   temperatureElement.innerHTML = Math.round(celTemp);
   cityElement.innerHTML = response.data.name;
   windElement.innerHTML = Math.round(response.data.wind.speed);
   humidityElement.innerHTML = response.data.main.humidity;
-  realFeelElement.innerHTML = Math.round(response.data.main.feels_like);
+  realFeelElement.innerHTML = `${Math.round(response.data.main.feels_like)} °C`;
   maxTempElement.innerHTML = `${Math.round(response.data.main.temp_max)}°C`;
   minTempElement.innerHTML = `${Math.round(response.data.main.temp_min)}°C`;
   currentDateElement.innerHTML = formatCurrentDate(response.data.dt * 1000);
@@ -75,21 +76,23 @@ function search(city) {
   let apiKey = "0999e8b27df7fe2ea21ba7c46d2fabaa";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}
  &appid=${apiKey}&units=metric`;
-
   axios.get(apiUrl).then(displayTemp);
+
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}
+ &appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
 }
 function submit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#enterCity");
   search(cityInputElement.value);
 }
-let form = document.querySelector("#enterCityForm");
-form.addEventListener("submit", submit);
 
 function fahrenheit(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = `${Math.round(celTemp * 9) / 5 + 32}`;
+  let far = (celTemp * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(far);
 
   document.querySelector("#max-temp").innerHTML = `${Math.round(
     (maxtemp * 9) / 5 + 32
@@ -98,13 +101,26 @@ function fahrenheit(event) {
   document.querySelector("#min-temp").innerHTML = `${Math.round(
     (mintemp * 9) / 5 + 32
   )}°F`;
+
+  document.querySelector("#real-feel").innerHTML = `${Math.round(
+    (realfeeltemp * 9) / 5 + 32
+  )}°F`;
 }
 
 function celsius(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = celTemp;
+
+  document.querySelector("#max-temp").innerHTML = `${Math.round(maxtemp)}°C`;
+  document.querySelector("#min-temp").innerHTML = `${Math.round(mintemp)}°C`;
+  document.querySelector("#real-feel").innerHTML = `${Math.round(
+    realfeeltemp
+  )}°C`;
 }
+
+let form = document.querySelector("#enterCityForm");
+form.addEventListener("submit", submit);
 
 let fahrenheitLink = document.querySelector("#far-link");
 fahrenheitLink.addEventListener("click", fahrenheit);
