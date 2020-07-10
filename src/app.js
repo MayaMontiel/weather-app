@@ -58,15 +58,16 @@ function displayTemp(response) {
   let currentDateElement = document.querySelector("#date");
 
   celTemp = Math.round(response.data.main.temp);
-    maxtemp = Math.round(response.data.main.temp_max);
+  maxtemp = Math.round(response.data.main.temp_max);
+  mintemp = Math.round(response.data.main.temp_min);
 
   temperatureElement.innerHTML = Math.round(celTemp);
   cityElement.innerHTML = response.data.name;
   windElement.innerHTML = Math.round(response.data.wind.speed);
   humidityElement.innerHTML = response.data.main.humidity;
   realFeelElement.innerHTML = Math.round(response.data.main.feels_like);
-  maxTempElement.innerHTML = Math.round(response.data.main.temp_max);
-  minTempElement.innerHTML = Math.round(response.data.main.temp_min);
+  maxTempElement.innerHTML = `${Math.round(response.data.main.temp_max)}°C`;
+  minTempElement.innerHTML = `${Math.round(response.data.main.temp_min)}°C`;
   currentDateElement.innerHTML = formatCurrentDate(response.data.dt * 1000);
 }
 
@@ -91,8 +92,12 @@ function fahrenheit(event) {
   temperatureElement.innerHTML = `${Math.round(celTemp * 9) / 5 + 32}`;
 
   document.querySelector("#max-temp").innerHTML = `${Math.round(
-    (maxTemp * 9) / 5 + 32
-  )}`;
+    (maxtemp * 9) / 5 + 32
+  )}°F`;
+
+  document.querySelector("#min-temp").innerHTML = `${Math.round(
+    (mintemp * 9) / 5 + 32
+  )}°F`;
 }
 
 function celsius(event) {
