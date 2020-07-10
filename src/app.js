@@ -57,7 +57,8 @@ function displayTemp(response) {
   let minTempElement = document.querySelector("#min-temp");
   let currentDateElement = document.querySelector("#date");
 
-  celTemp = response.data.main.temp;
+  celTemp = Math.round(response.data.main.temp);
+    maxtemp = Math.round(response.data.main.temp_max);
 
   temperatureElement.innerHTML = Math.round(celTemp);
   cityElement.innerHTML = response.data.name;
@@ -83,5 +84,27 @@ function submit(event) {
 }
 let form = document.querySelector("#enterCityForm");
 form.addEventListener("submit", submit);
+
+function fahrenheit(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = `${Math.round(celTemp * 9) / 5 + 32}`;
+
+  document.querySelector("#max-temp").innerHTML = `${Math.round(
+    (maxTemp * 9) / 5 + 32
+  )}`;
+}
+
+function celsius(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = celTemp;
+}
+
+let fahrenheitLink = document.querySelector("#far-link");
+fahrenheitLink.addEventListener("click", fahrenheit);
+
+let celsiusLink = document.querySelector("#cel-link");
+celsiusLink.addEventListener("click", celsius);
 
 search("Toronto");
