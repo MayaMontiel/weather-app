@@ -1,3 +1,11 @@
+function forecastDate(timestamp) {
+  let date = new Date(timestamp);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  let day = days[date.getDay()];
+
+  return `${day}.`;
+}
+
 function formatCurrentDate(timestamp) {
   let date = new Date(timestamp);
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -46,7 +54,7 @@ function formatHours(timestamp) {
 }
 
 function displayTemp(response) {
-  console.log(response.data);
+  //console.log(response.data);
 
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city-name");
@@ -80,13 +88,36 @@ function displayForecast(response) {
   for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
 
-    forecastElement.innerHTML = `<div class="col-2">
+    console.log(forecast);
+
+    forecastElement.innerHTML += `<div class="col-2">
               <span>${formatHours(forecast.dt * 1000)}</span>
               <img id = "icon" src="http://openweathermap.org/img/wn/${
                 forecast.weather[0].icon
               }@2x.png" />
               <div class="forecast-temp">
                 <span>${Math.round(forecast.main.temp)}°C</span>
+               
+              </div>
+            </div>`;
+  }
+}
+
+function displayDailyForecast(response) {
+  let forecastDailyElement = document.querySelector("#forecastDaily");
+  forecastDailyElement.innerHTML = null;
+  let forecastDaily = null;
+
+  for (let index2 = 0; index2 < 6; index2++) {
+    forecastDaily = response.data.list[index2];
+
+    forecastDailyElement.innerHTML += `<div class="col-2">
+              <span>${forecastDate(forecastDaily.dt * 1000)}</span>
+              <img id = "icon" src="http://openweathermap.org/img/wn/${
+                forecastDaily.weather[0].icon
+              }@2x.png" />
+              <div class="forecast-temp">
+                <span>°C</span>
               </div>
             </div>`;
   }
@@ -101,6 +132,12 @@ function search(city) {
   apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}
  &appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}
+  &appid=${apiKey}&units=metric`;
+
+  //apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&mode=xml&appid=&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayDailyForecast);
 }
 function submit(event) {
   event.preventDefault();
