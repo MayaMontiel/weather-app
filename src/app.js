@@ -1,3 +1,50 @@
+function formatCurrentDate(timestamp) {
+  let date = new Date(timestamp);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  let day = days[date.getDay()];
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let month = months[date.getMonth()];
+  let actualDate = date.getDate();
+  let year = date.getFullYear();
+
+  return `${formatHours(timestamp)}<br>
+  ${day}., ${month}. ${actualDate}, ${year}`;
+}
+
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours > 12) {
+    hours = hours - 12;
+    if (hours === 0) {
+      hours = "12";
+    }
+    if (hours < 10) {
+      hours = `0${hours}`;
+    }
+  }
+
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${hours}:${minutes}`;
+}
+
 function displayTemp(response) {
   console.log(response.data);
 
@@ -8,6 +55,7 @@ function displayTemp(response) {
   let realFeelElement = document.querySelector("#real-feel");
   let maxTempElement = document.querySelector("#max-temp");
   let minTempElement = document.querySelector("#min-temp");
+  let currentDateElement = document.querySelector("#date");
 
   celTemp = response.data.main.temp;
 
@@ -18,6 +66,7 @@ function displayTemp(response) {
   realFeelElement.innerHTML = Math.round(response.data.main.feels_like);
   maxTempElement.innerHTML = Math.round(response.data.main.temp_max);
   minTempElement.innerHTML = Math.round(response.data.main.temp_min);
+  currentDateElement.innerHTML = formatCurrentDate(response.data.dt * 1000);
 }
 
 function search(city) {
