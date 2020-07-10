@@ -1,0 +1,69 @@
+body {
+  display: block;
+  margin: 0 auto;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0px;
+}
+
+a {
+  color: black;
+}
+
+.card-body3 {
+  font-size: 13px;
+  padding-top: 20px;
+}
+
+.weather-border {
+  border: 1px solid;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
+}
+
+.class {
+  border: none;
+}
+
+#searchGlass {
+  background: transparent;
+  border: none;
+  font-size: 25px;
+}
+
+#currentLocation {
+  background: transparent;
+  border: none;
+  font-size: 25px;
+}
+
+#units {
+  font-size: 15px;
+  position: relative;
+  top: -35px;
+}
+#li-units {
+  position: relative;
+  top: -15px;
+  font-size: 13px;
+}
+
+#temperature {
+  font-size: 50px;
+  position: relative;
+  top: -15px;
+}
+
+#open-source {
+  color: blue;
+}
+#github {
+  display: block;
+  margin: 0 auto;
+  max-width: 600px;
+}
