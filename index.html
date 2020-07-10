@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <title>My Weather App</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/style.css" />
+    <script
+      src="https://kit.fontawesome.com/f611cab2b6.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="weather-border">
+        <div class="weather-app">
+          <form class="form-inline" id="enterCityForm">
+            <input
+              type="text"
+              class="form-control form-control-sm mb-2 mr-2 col-9"
+              placeholder="Enter City"
+              autofocus="on"
+              id="enterCity"
+            />
+
+            <button
+              type="submit"
+              id="searchGlass"
+              class="btn btn-primary btn-sm mb-2 ml-2"
+            >
+              <i class="fas fa-search"></i>
+            </button>
+
+            <button
+              id="currentLocation"
+              class="btn btn-primary btn-sm mb-2 ml-2"
+            >
+              <i class="fas fa-map-marked-alt"></i>
+            </button>
+          </form>
+
+          <div class="row" id="display">
+            <div class="col-5" id="city-display">
+              <ul>
+                <li>
+                  <h1 id="city-name"></h1>
+                </li>
+                <li id="time">9:30 PM</li>
+                <li id="date">Thur.,Jun 18, 2020</li>
+              </ul>
+            </div>
+            <div class="col-3" style="width: 20em;" id="temperature-display">
+              <ul>
+                <li>
+                  <span id="temperature">18</span>
+                  <span id="units"
+                    ><a href="" id="celsius-link" class="active">°C</a> |<a
+                      href=""
+                      id="far-link"
+                      >°F</a
+                    ></span
+                  >
+                </li>
+                <div id="li-units">
+                  <li>
+                    <span id="max-temp">27</span>&deg;C /
+                    <span id="min-temp">21</span>&deg;C
+                  </li>
+                  <li>Real Feel <span id="real-feel">25</span>&deg;C</li>
+                </div>
+              </ul>
+            </div>
+
+            <div class="col-3" style="width: 20rem;">
+              <div class="card-body3">
+                <ul>
+                  <li>Wind : <span id="wind">10</span> km/h</li>
+                  <li>Humidity : <span id="humidity"></span>%</li>
+                  <li>Uv Index : <span id="uvIndex"></span>%</li>
+                  <li>PoP : <span id="percipitation"></span>%</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <small>Hourly</small>
+        <hr />
+        <div class="hourly">
+          <div class="row" id="forecast">
+            <div class="col-2">
+              <span>6:00</span>
+              <img src="" />
+              <div class="forecast-temp">
+                <span>25&degC</span>
+              </div>
+            </div>
+            <div class="col-2">
+              <span>7:00</span>
+              <img src="" />
+              <div class="forecast-temp">
+                <span>25&degC</span>
+              </div>
+            </div>
+            <div class="col-2">
+              <span>7:00</span>
+              <img src="" />
+              <div class="forecast-temp">
+                <span>25&degC</span>
+              </div>
+            </div>
+            <div class="col-2">
+              <span>7:00</span>
+              <img src="" />
+              <div class="forecast-temp">
+                <span>25&degC</span>
+              </div>
+            </div>
+            <div class="col-2">
+              <span>6:00</span>
+              <img src="" />
+              <div class="forecast-temp">
+                <span>25&degC</span>
+              </div>
+            </div>
+            <div class="col-2">
+              <span>6:00</span>
+              <img src="" />
+              <div class="forecast-temp">
+                <span>25&degC</span>
+              </div>
+            </div>
+          </div>
+          <br />
+          <small>Daily</small>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              Fri<br />
+              ☀<br />
+              <small>30&deg; / 20&deg;</small>
+            </div>
+            <div class="col-2">
+              Sat<br />
+              ☀<br />
+              <small>30&deg; / 20&deg;</small>
+            </div>
+            <div class="col-2">
+              Sat<br />
+              ☀<br />
+              <small>30&deg; / 20&deg;</small>
+            </div>
+            <div class="col-2">
+              Sat<br />
+              ☀<br />
+              <small>30&deg; / 20&deg;</small>
+            </div>
+            <div class="col-2">
+              Sat<br />
+              ☀<br />
+              <small>30&deg; / 20&deg;</small>
+            </div>
+            <div class="col-2">
+              Sat<br />
+              ☀<br />
+              <small>30&deg; / 20&deg;</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <small id="github"
+      ><a
+        href="https://github.com/MayaMontiel/weather-app-project"
+        id="open-source"
+        target="_blank"
+        >Open-source code</a
+      >
+      by Maya Montiel
+    </small>
+  </body>
+  <script src="src/app.js"></script>
+</html>
