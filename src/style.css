@@ -26,10 +26,6 @@ a {
   background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
 }
 
-.class {
-  border: none;
-}
-
 #searchGlass {
   background: transparent;
   border: none;
@@ -57,6 +53,17 @@ a {
   font-size: 50px;
   position: relative;
   top: -15px;
+}
+
+#forecast {
+  text-align: center;
+}
+
+#icon {
+  font-size: 10px;
+
+  position: relative;
+  left: -18px;
 }
 
 #open-source {

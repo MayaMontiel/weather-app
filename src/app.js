@@ -72,13 +72,33 @@ function displayTemp(response) {
   currentDateElement.innerHTML = formatCurrentDate(response.data.dt * 1000);
 }
 
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 6; index++) {
+    forecast = response.data.list[index];
+
+    forecastElement.innerHTML = `<div class="col-2">
+              <span>${formatHours(forecast.dt * 1000)}</span>
+              <img id = "icon" src="http://openweathermap.org/img/wn/${
+                forecast.weather[0].icon
+              }@2x.png" />
+              <div class="forecast-temp">
+                <span>${Math.round(forecast.main.temp)}°C</span>
+              </div>
+            </div>`;
+  }
+}
+
 function search(city) {
   let apiKey = "0999e8b27df7fe2ea21ba7c46d2fabaa";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}
  &appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayTemp);
 
-  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}
  &appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
