@@ -35,6 +35,7 @@ function formatCurrentDate(timestamp) {
 function formatHours(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
+
   if (hours > 12) {
     hours = hours - 12;
     if (hours === 0) {
@@ -49,7 +50,9 @@ function formatHours(timestamp) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-
+  //hours += hours >= 12 ? "pm" : "am";
+  //let pm = document.querySelector("#pm");
+  //if (hours >= 12) pm.innerHTML += "pm";
   return `${hours}:${minutes}`;
 }
 
@@ -64,6 +67,12 @@ function displayTemp(response) {
   let maxTempElement = document.querySelector("#max-temp");
   let minTempElement = document.querySelector("#min-temp");
   let currentDateElement = document.querySelector("#date");
+  let weatherDescriptionElement = document.querySelector(
+    "#weather-description"
+  );
+  
+  //let timeElement = document.querySelector("#time");
+  //let uvIndexElement = document.querySelector("#uv");
 
   celTemp = Math.round(response.data.main.temp);
   maxtemp = Math.round(response.data.main.temp_max);
@@ -78,12 +87,15 @@ function displayTemp(response) {
   maxTempElement.innerHTML = `${Math.round(response.data.main.temp_max)}°C`;
   minTempElement.innerHTML = `${Math.round(response.data.main.temp_min)}°C`;
   currentDateElement.innerHTML = formatCurrentDate(response.data.dt * 1000);
-
+  weatherDescriptionElement.innerHTML = response.data.weather[0].description;
+  
+  //timeElement.innerHTML = formatHours(response.data.dt * 1000);
+  //uviIndexElement.innerHTML = response.data.
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
-  console.log(response.data.coord);
 
   apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&%20exclude=hourly,daily&appid=0999e8b27df7fe2ea21ba7c46d2fabaa`;
+  console.log(response);
   axios.get(apiUrl).then(displayDailyForecast);
 }
 
@@ -115,11 +127,11 @@ function displayDailyForecast(response) {
   forecastDailyElement.innerHTML = null;
   let forecastDaily = null;
 
-  //for (let index = 0; index < 6; index++) {
-  forecastDaily = response.data.daily[1];
-  console.log(response);
+  for (let index = 1; index < 7; index++) {
+    forecastDaily = response.data.daily[index];
+    //console.log(response);
 
-  forecastDailyElement.innerHTML += `<div class="col-2">
+    forecastDailyElement.innerHTML += `<div class="col-2">
               <span>${forecastDate(forecastDaily.dt * 1000)}</span>
               <img id = "icon" src="" />
               <div class="forecast-temp">
@@ -127,18 +139,18 @@ function displayDailyForecast(response) {
               </div>
             </div>`;
 
-  forecastDaily = response.data.daily[2];
-  //console.log(response.data.daily[]);
+    //forecastDaily = response.data.daily[2];
+    //console.log(response.data.daily[]);
 
-  forecastDailyElement.innerHTML += `<div class="col-2">
-              <span>${forecastDate(forecastDaily.dt * 1000)}</span>
-              <img id = "icon" src="" />
-              <div class="forecast-temp">
-                <span>°C</span>
-              </div>
-            </div>`;
+    //forecastDailyElement.innerHTML += `<div class="col-2">
+    //          <span>${forecastDate(forecastDaily.dt * 1000)}</span>
+    //         <img id = "icon" src="" />
+    //         <div class="forecast-temp">
+    //           <span>°C</span>
+    //         </div>
+    //       </div>`;
+  }
 }
-//}
 
 function search(city) {
   let apiKey = "0999e8b27df7fe2ea21ba7c46d2fabaa";
@@ -155,6 +167,8 @@ function submit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#enterCity");
   search(cityInputElement.value);
+  let input = document.querySelector("#enterCity");
+  input.value = "";
 }
 
 function fahrenheit(event) {
@@ -195,6 +209,7 @@ function retrievePosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+
   axios.get(apiUrl).then(displayTemp);
 }
 
