@@ -126,8 +126,9 @@ function displayDailyForecast(response) {
   let forecastDailyElement = document.querySelector("#forecastDaily");
   forecastDailyElement.innerHTML = null;
   let forecastDaily = null;
+
   let uviIndexElement = document.querySelector("#uvIndex");
-  uviIndexElement.innerHTML = response.data.current.uvi;
+  uviIndexElement.innerHTML = `${Math.round(response.data.current.uvi)}`;
 
   for (let index = 1; index < 7; index++) {
     forecastDaily = response.data.daily[index];
