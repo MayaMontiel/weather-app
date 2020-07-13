@@ -121,6 +121,7 @@ function displayForecast(response) {
   }
 }
 
+//daily forecast
 function displayDailyForecast(response) {
   let forecastDailyElement = document.querySelector("#forecastDaily");
   forecastDailyElement.innerHTML = null;
@@ -130,7 +131,7 @@ function displayDailyForecast(response) {
 
   for (let index = 1; index < 7; index++) {
     forecastDaily = response.data.daily[index];
-    //console.log(response.data);
+    //console.log(response);
 
     forecastDailyElement.innerHTML += `<div class="col-2">
               <span id="day">${forecastDate(forecastDaily.dt * 1000)}</span>
