@@ -112,7 +112,7 @@ function displayForecast(response) {
               <img id = "icon" src="http://openweathermap.org/img/wn/${
                 forecast.weather[0].icon
               }@2x.png" />
-              <div class="forecast-temp">
+              <div id="hourly-forecast-temp">
                 <span>${Math.round(forecast.main.temp)}°C</span>
                
                
@@ -130,30 +130,19 @@ function displayDailyForecast(response) {
 
   for (let index = 1; index < 7; index++) {
     forecastDaily = response.data.daily[index];
-    console.log(response.data);
+    //console.log(response.data);
 
     forecastDailyElement.innerHTML += `<div class="col-2">
-              <span>${forecastDate(forecastDaily.dt * 1000)}</span>
+              <span id="day">${forecastDate(forecastDaily.dt * 1000)}</span>
               <img id = "icon" src="http://openweathermap.org/img/wn/${
                 forecastDaily.weather[0].icon
               }@2x.png" />
-              <div class="forecast-temp">
+              <div id="daily-forecast-temp">
                 <span>${Math.round(forecastDaily.temp.min)}°C/${Math.round(
       forecastDaily.temp.max
     )}°C</span>
               </div>
             </div>`;
-
-    //forecastDaily = response.data.daily[2];
-    //console.log(response.data.daily[]);
-
-    //forecastDailyElement.innerHTML += `<div class="col-2">
-    //          <span>${forecastDate(forecastDaily.dt * 1000)}</span>
-    //         <img id = "icon" src="" />
-    //         <div class="forecast-temp">
-    //           <span>°C</span>
-    //         </div>
-    //       </div>`;
   }
 }
 

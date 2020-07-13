@@ -68,6 +68,10 @@ a {
   position: relative;
   left: -18px;
 }
+#day {
+  position: relative;
+  left: 20px;
+}
 
 #open-source {
   color: blue;
