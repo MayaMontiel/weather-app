@@ -57,7 +57,7 @@ function formatHours(timestamp) {
 }
 
 function displayTemp(response) {
-  console.log(response);
+  //console.log(response);
 
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city-name");
@@ -70,9 +70,8 @@ function displayTemp(response) {
   let weatherDescriptionElement = document.querySelector(
     "#weather-description"
   );
-  
+
   //let timeElement = document.querySelector("#time");
-  //let uvIndexElement = document.querySelector("#uv");
 
   celTemp = Math.round(response.data.main.temp);
   maxtemp = Math.round(response.data.main.temp_max);
@@ -88,14 +87,14 @@ function displayTemp(response) {
   minTempElement.innerHTML = `${Math.round(response.data.main.temp_min)}°C`;
   currentDateElement.innerHTML = formatCurrentDate(response.data.dt * 1000);
   weatherDescriptionElement.innerHTML = response.data.weather[0].description;
-  
+
   //timeElement.innerHTML = formatHours(response.data.dt * 1000);
-  //uviIndexElement.innerHTML = response.data.
+
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
 
-  apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&%20exclude=hourly,daily&appid=0999e8b27df7fe2ea21ba7c46d2fabaa`;
-  console.log(response);
+  apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&daily&appid=0999e8b27df7fe2ea21ba7c46d2fabaa&units=metric`;
+  //console.log(response);
   axios.get(apiUrl).then(displayDailyForecast);
 }
 
@@ -126,16 +125,22 @@ function displayDailyForecast(response) {
   let forecastDailyElement = document.querySelector("#forecastDaily");
   forecastDailyElement.innerHTML = null;
   let forecastDaily = null;
+  let uviIndexElement = document.querySelector("#uvIndex");
+  uviIndexElement.innerHTML = response.data.current.uvi;
 
   for (let index = 1; index < 7; index++) {
     forecastDaily = response.data.daily[index];
-    //console.log(response);
+    console.log(response.data);
 
     forecastDailyElement.innerHTML += `<div class="col-2">
               <span>${forecastDate(forecastDaily.dt * 1000)}</span>
-              <img id = "icon" src="" />
+              <img id = "icon" src="http://openweathermap.org/img/wn/${
+                forecastDaily.weather[0].icon
+              }@2x.png" />
               <div class="forecast-temp">
-                <span>°C</span>
+                <span>${Math.round(forecastDaily.temp.min)}°C/${Math.round(
+      forecastDaily.temp.max
+    )}°C</span>
               </div>
             </div>`;
 
