@@ -34,6 +34,7 @@ function formatCurrentDate(timestamp) {
 
 function formatHours(timestamp) {
   let date = new Date(timestamp);
+
   let hours = date.getHours();
 
   if (hours > 12) {
@@ -50,9 +51,11 @@ function formatHours(timestamp) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-  //hours += hours >= 12 ? "pm" : "am";
-  //let pm = document.querySelector("#pm");
-  //if (hours >= 12) pm.innerHTML += "pm";
+  //return date.toLocaleString(`en-US`, {
+  // hours: `numeric`,
+  // minutes: `numeric`,
+  // hours12: true,
+  //});
   return `${hours}:${minutes}`;
 }
 
@@ -71,8 +74,6 @@ function displayTemp(response) {
     "#weather-description"
   );
 
-  //let timeElement = document.querySelector("#time");
-
   celTemp = Math.round(response.data.main.temp);
   maxtemp = Math.round(response.data.main.temp_max);
   mintemp = Math.round(response.data.main.temp_min);
@@ -87,8 +88,6 @@ function displayTemp(response) {
   minTempElement.innerHTML = `${Math.round(response.data.main.temp_min)}°C`;
   currentDateElement.innerHTML = formatCurrentDate(response.data.dt * 1000);
   weatherDescriptionElement.innerHTML = response.data.weather[0].description;
-
-  //timeElement.innerHTML = formatHours(response.data.dt * 1000);
 
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
@@ -106,7 +105,7 @@ function displayForecast(response) {
 
   for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
-    forecast2 = `${Math.round(response.data.list[index].main.temp)}`;
+    forecast2 = Math.round(response.data.list[index].main.temp);
     //console.log(forecast2);
     forecastElement.innerHTML += `<div class="col-2">
               <span>${formatHours(forecast.dt * 1000)}</span>
@@ -200,6 +199,9 @@ function celsius(event) {
   document.querySelector("#min-temp").innerHTML = `${Math.round(mintemp)}°C`;
   document.querySelector("#real-feel").innerHTML = `${Math.round(
     realfeeltemp
+  )}°C`;
+  document.querySelector("#hourly-forecast-temp").innerHTML = `${Math.round(
+    forecast2
   )}°C`;
 }
 
