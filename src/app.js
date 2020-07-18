@@ -105,8 +105,8 @@ function displayForecast(response) {
 
   for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
-
-    //console.log(forecast2);
+    forecast2 = forecast.main.temp;
+    console.log(forecast);
     forecastElement.innerHTML += `<div class="col-2">
               <span>${formatHours(forecast.dt * 1000)}</span>
               <img id = "icon" src="http://openweathermap.org/img/wn/${
@@ -132,7 +132,7 @@ function displayDailyForecast(response) {
 
   for (let index = 1; index < 7; index++) {
     forecastDaily = response.data.daily[index];
-    //console.log(response);
+    //console.log(forecastDaily);
 
     forecastDailyElement.innerHTML += `<div class="col-2">
               <span id="day">${forecastDate(forecastDaily.dt * 1000)}</span>
@@ -185,11 +185,9 @@ function fahrenheit(event) {
     (realfeeltemp * 9) / 5 + 32
   )}°F`;
 
-  //forecast2 = Math.round(response.data.list[index].main.temp);
-
   let forecastHourly = document.querySelectorAll("#hourly-forecast-temp");
-  forecastHourly.foreEach(function (forecastItem) {
-    forecastItem.innerHTML = `${Math.round(forecast.main.temp * 9) / 5 + 32}°F`;
+  forecastHourly.forEach(function (forecastItem) {
+    forecastItem.innerHTML = `${Math.round(forecast2 * 9) / 5 + 32}°F`;
   });
 }
 
@@ -203,9 +201,14 @@ function celsius(event) {
   document.querySelector("#real-feel").innerHTML = `${Math.round(
     realfeeltemp
   )}°C`;
-  document.querySelector("#hourly-forecast-temp").innerHTML = `${Math.round(
-    forecast2
-  )}°C`;
+  //document.querySelector("#hourly-forecast-temp").innerHTML = `${Math.round(
+  //  forecast2
+  //)}°C`;
+
+  let forecastHourly = document.querySelectorAll("#hourly-forecast-temp");
+  forecastHourly.forEach(function (forecastItem) {
+    forecastItem.innerHTML = `${Math.round(forecast2)}°C`;
+  });
 }
 
 //CurrentLocation
