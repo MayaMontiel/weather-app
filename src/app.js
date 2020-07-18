@@ -105,7 +105,7 @@ function displayForecast(response) {
 
   for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
-    forecast2 = Math.round(response.data.list[index].main.temp);
+
     //console.log(forecast2);
     forecastElement.innerHTML += `<div class="col-2">
               <span>${formatHours(forecast.dt * 1000)}</span>
@@ -139,7 +139,7 @@ function displayDailyForecast(response) {
               <img id = "icon" src="http://openweathermap.org/img/wn/${
                 forecastDaily.weather[0].icon
               }@2x.png" />
-              <div id="daily-forecast-temp">
+              <div class="daily-forecast-temp">
                 <span>${Math.round(forecastDaily.temp.min)}°C/${Math.round(
       forecastDaily.temp.max
     )}°C</span>
@@ -185,9 +185,12 @@ function fahrenheit(event) {
     (realfeeltemp * 9) / 5 + 32
   )}°F`;
 
-  document.querySelector("#hourly-forecast-temp").innerHTML = `${
-    Math.round(forecast2 * 9) / 5 + 32
-  }°F`;
+  //forecast2 = Math.round(response.data.list[index].main.temp);
+
+  let forecastHourly = document.querySelectorAll("#hourly-forecast-temp");
+  forecastHourly.foreEach(function (forecastItem) {
+    forecastItem.innerHTML = `${Math.round(forecast.main.temp * 9) / 5 + 32}°F`;
+  });
 }
 
 function celsius(event) {
