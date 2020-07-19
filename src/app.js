@@ -187,6 +187,64 @@ function displayDailyForecast(response) {
   )}°C</span>
               </div>
             </div>`;
+
+  forecastDaily4 = response.data.daily[4];
+  forecastDailymin4 = forecastDaily4.temp.min;
+  forecastDailymax4 = forecastDaily4.temp.max;
+  //console.log(forecastDaily);
+
+  forecastDailyElement.innerHTML += `<div class="col-2">
+              <span id="day">${forecastDate(forecastDaily4.dt * 1000)}</span>
+              <img id = "icon" src="http://openweathermap.org/img/wn/${
+                forecastDaily4.weather[0].icon
+              }@2x.png" />
+              <div class="daily-forecast-temp">
+                <span id="dailyMin4">${Math.round(
+                  forecastDaily4.temp.min
+                )}°C</span>/<span id="dailyMax4">${Math.round(
+    forecastDaily4.temp.max
+  )}°C</span>
+              </div>
+            </div>`;
+
+  forecastDaily5 = response.data.daily[5];
+  forecastDailymin5 = forecastDaily5.temp.min;
+  forecastDailymax5 = forecastDaily5.temp.max;
+  //console.log(forecastDaily);
+
+  forecastDailyElement.innerHTML += `<div class="col-2">
+              <span id="day">${forecastDate(forecastDaily5.dt * 1000)}</span>
+              <img id = "icon" src="http://openweathermap.org/img/wn/${
+                forecastDaily5.weather[0].icon
+              }@2x.png" />
+              <div class="daily-forecast-temp">
+                <span id="dailyMin5">${Math.round(
+                  forecastDaily5.temp.min
+                )}°C</span>/<span id="dailyMax5">${Math.round(
+    forecastDaily5.temp.max
+  )}°C</span>
+              </div>
+            </div>`;
+
+  forecastDaily6 = response.data.daily[6];
+  forecastDailymin6 = forecastDaily6.temp.min;
+  forecastDailymax6 = forecastDaily6.temp.max;
+  //console.log(forecastDaily);
+
+  forecastDailyElement.innerHTML += `<div class="col-2">
+              <span id="day">${forecastDate(forecastDaily6.dt * 1000)}</span>
+              <img id = "icon" src="http://openweathermap.org/img/wn/${
+                forecastDaily6.weather[0].icon
+              }@2x.png" />
+              <div class="daily-forecast-temp">
+                <span id="dailyMin6">${Math.round(
+                  forecastDaily6.temp.min
+                )}°C</span>/<span id="dailyMax6">${Math.round(
+    forecastDaily6.temp.max
+  )}°C</span>
+              </div>
+            </div>`;
+
   //}
 }
 
@@ -232,7 +290,7 @@ function fahrenheit(event) {
   //  forecastItem.innerHTML = `${Math.round(forecast2 * 9) / 5 + 32}°F`;
   // });
 
-  //Daily Forecast min and max far
+  //Daily Forecast min  far
   document.querySelector("#dailyMin").innerHTML = `${Math.round(
     (forecastDailymin * 9) / 5 + 32
   )}°F`;
@@ -242,7 +300,17 @@ function fahrenheit(event) {
   document.querySelector("#dailyMin3").innerHTML = `${Math.round(
     (forecastDailymin3 * 9) / 5 + 32
   )}°F`;
+  document.querySelector("#dailyMin4").innerHTML = `${Math.round(
+    (forecastDailymin4 * 9) / 5 + 32
+  )}°F`;
+  document.querySelector("#dailyMin5").innerHTML = `${Math.round(
+    (forecastDailymin5 * 9) / 5 + 32
+  )}°F`;
+  document.querySelector("#dailyMin6").innerHTML = `${Math.round(
+    (forecastDailymin6 * 9) / 5 + 32
+  )}°F`;
 
+  //daily forecast max temp far
   document.querySelector("#dailyMax").innerHTML = `${Math.round(
     (forecastDailymax * 9) / 5 + 32
   )}°F`;
@@ -251,6 +319,15 @@ function fahrenheit(event) {
   )}°F`;
   document.querySelector("#dailyMax3").innerHTML = `${Math.round(
     (forecastDailymax3 * 9) / 5 + 32
+  )}°F`;
+  document.querySelector("#dailyMax4").innerHTML = `${Math.round(
+    (forecastDailymax4 * 9) / 5 + 32
+  )}°F`;
+  document.querySelector("#dailyMax5").innerHTML = `${Math.round(
+    (forecastDailymax5 * 9) / 5 + 32
+  )}°F`;
+  document.querySelector("#dailyMax6").innerHTML = `${Math.round(
+    (forecastDailymax6 * 9) / 5 + 32
   )}°F`;
 }
 
@@ -265,7 +342,7 @@ function celsius(event) {
     realfeeltemp
   )}°C`;
 
-  //daiy forecast min and max celcius
+  //daiy forecast min  cel
   document.querySelector("#dailyMin").innerHTML = `${Math.round(
     forecastDailymin
   )}°C`;
@@ -275,7 +352,17 @@ function celsius(event) {
   document.querySelector("#dailyMin3").innerHTML = `${Math.round(
     forecastDailymin3
   )}°C`;
+  document.querySelector("#dailyMin4").innerHTML = `${Math.round(
+    forecastDailymin4
+  )}°C`;
+  document.querySelector("#dailyMin5").innerHTML = `${Math.round(
+    forecastDailymin5
+  )}°C`;
+  document.querySelector("#dailyMin6").innerHTML = `${Math.round(
+    forecastDailymin6
+  )}°C`;
 
+  //daiy forecast max  cel
   document.querySelector("#dailyMax").innerHTML = `${Math.round(
     forecastDailymax
   )}°C`;
@@ -284,6 +371,15 @@ function celsius(event) {
   )}°C`;
   document.querySelector("#dailyMax3").innerHTML = `${Math.round(
     forecastDailymax3
+  )}°C`;
+  document.querySelector("#dailyMax4").innerHTML = `${Math.round(
+    forecastDailymax4
+  )}°C`;
+  document.querySelector("#dailyMax5").innerHTML = `${Math.round(
+    forecastDailymax5
+  )}°C`;
+  document.querySelector("#dailyMax6").innerHTML = `${Math.round(
+    forecastDailymax6
   )}°C`;
   //document.querySelector("#hourly-forecast-temp").innerHTML = `${Math.round(
   //  forecast2
