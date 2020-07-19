@@ -106,7 +106,7 @@ function displayForecast(response) {
   for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
     forecast2 = forecast.main.temp;
-    console.log(forecast);
+    //console.log(forecast);
     forecastElement.innerHTML += `<div class="col-2">
               <span>${formatHours(forecast.dt * 1000)}</span>
               <img id = "icon" src="http://openweathermap.org/img/wn/${
@@ -130,22 +130,64 @@ function displayDailyForecast(response) {
   let uviIndexElement = document.querySelector("#uvIndex");
   uviIndexElement.innerHTML = `${Math.round(response.data.current.uvi)}`;
 
-  for (let index = 1; index < 7; index++) {
-    forecastDaily = response.data.daily[index];
-    //console.log(forecastDaily);
+  //for (let index = 1; index < 7; index++) {
+  forecastDaily = response.data.daily[1];
+  forecastDailymin = forecastDaily.temp.min;
+  forecastDailymax = forecastDaily.temp.max;
+  //console.log(forecastDailymax);
 
-    forecastDailyElement.innerHTML += `<div class="col-2">
+  forecastDailyElement.innerHTML += `<div class="col-2">
               <span id="day">${forecastDate(forecastDaily.dt * 1000)}</span>
               <img id = "icon" src="http://openweathermap.org/img/wn/${
                 forecastDaily.weather[0].icon
               }@2x.png" />
               <div class="daily-forecast-temp">
-                <span>${Math.round(forecastDaily.temp.min)}°C/${Math.round(
-      forecastDaily.temp.max
-    )}°C</span>
+                <span id = "dailyMin">${Math.round(
+                  forecastDaily.temp.min
+                )}°C</span>/<span id="dailyMax">${Math.round(
+    forecastDaily.temp.max
+  )}°C</span>
               </div>
             </div>`;
-  }
+
+  forecastDaily2 = response.data.daily[2];
+  forecastDailymin2 = forecastDaily2.temp.min;
+  forecastDailymax2 = forecastDaily2.temp.max;
+  //console.log(forecastDaily);
+
+  forecastDailyElement.innerHTML += `<div class="col-2">
+              <span id="day">${forecastDate(forecastDaily2.dt * 1000)}</span>
+              <img id = "icon" src="http://openweathermap.org/img/wn/${
+                forecastDaily2.weather[0].icon
+              }@2x.png" />
+              <div class="daily-forecast-temp">
+                <span id="dailyMin2">${Math.round(
+                  forecastDaily2.temp.min
+                )}°C</span>/<span id="dailyMax2">${Math.round(
+    forecastDaily2.temp.max
+  )}°C</span>
+              </div>
+            </div>`;
+
+  forecastDaily3 = response.data.daily[3];
+  forecastDailymin3 = forecastDaily3.temp.min;
+  forecastDailymax3 = forecastDaily3.temp.max;
+  //console.log(forecastDaily);
+
+  forecastDailyElement.innerHTML += `<div class="col-2">
+              <span id="day">${forecastDate(forecastDaily3.dt * 1000)}</span>
+              <img id = "icon" src="http://openweathermap.org/img/wn/${
+                forecastDaily3.weather[0].icon
+              }@2x.png" />
+              <div class="daily-forecast-temp">
+                <span id="dailyMin3">${Math.round(
+                  forecastDaily3.temp.min
+                )}°C</span>/<span id="dailyMax3">${Math.round(
+    forecastDaily3.temp.max
+  )}°C</span>
+              </div>
+            </div>`;
+  //}
 }
 
 function search(city) {
@@ -185,10 +227,31 @@ function fahrenheit(event) {
     (realfeeltemp * 9) / 5 + 32
   )}°F`;
 
-  let forecastHourly = document.querySelectorAll("#hourly-forecast-temp");
-  forecastHourly.forEach(function (forecastItem) {
-    forecastItem.innerHTML = `${Math.round(forecast2 * 9) / 5 + 32}°F`;
-  });
+  //let forecastHourly = document.querySelectorAll("#hourly-forecast-temp");
+  //forecastHourly.forEach(function (forecastItem) {
+  //  forecastItem.innerHTML = `${Math.round(forecast2 * 9) / 5 + 32}°F`;
+  // });
+
+  //Daily Forecast min and max far
+  document.querySelector("#dailyMin").innerHTML = `${Math.round(
+    (forecastDailymin * 9) / 5 + 32
+  )}°F`;
+  document.querySelector("#dailyMin2").innerHTML = `${Math.round(
+    (forecastDailymin2 * 9) / 5 + 32
+  )}°F`;
+  document.querySelector("#dailyMin3").innerHTML = `${Math.round(
+    (forecastDailymin3 * 9) / 5 + 32
+  )}°F`;
+
+  document.querySelector("#dailyMax").innerHTML = `${Math.round(
+    (forecastDailymax * 9) / 5 + 32
+  )}°F`;
+  document.querySelector("#dailyMax2").innerHTML = `${Math.round(
+    (forecastDailymax2 * 9) / 5 + 32
+  )}°F`;
+  document.querySelector("#dailyMax3").innerHTML = `${Math.round(
+    (forecastDailymax3 * 9) / 5 + 32
+  )}°F`;
 }
 
 function celsius(event) {
@@ -201,14 +264,35 @@ function celsius(event) {
   document.querySelector("#real-feel").innerHTML = `${Math.round(
     realfeeltemp
   )}°C`;
+
+  //daiy forecast min and max celcius
+  document.querySelector("#dailyMin").innerHTML = `${Math.round(
+    forecastDailymin
+  )}°C`;
+  document.querySelector("#dailyMin2").innerHTML = `${Math.round(
+    forecastDailymin2
+  )}°C`;
+  document.querySelector("#dailyMin3").innerHTML = `${Math.round(
+    forecastDailymin3
+  )}°C`;
+
+  document.querySelector("#dailyMax").innerHTML = `${Math.round(
+    forecastDailymax
+  )}°C`;
+  document.querySelector("#dailyMax2").innerHTML = `${Math.round(
+    forecastDailymax2
+  )}°C`;
+  document.querySelector("#dailyMax3").innerHTML = `${Math.round(
+    forecastDailymax3
+  )}°C`;
   //document.querySelector("#hourly-forecast-temp").innerHTML = `${Math.round(
   //  forecast2
   //)}°C`;
 
-  let forecastHourly = document.querySelectorAll("#hourly-forecast-temp");
-  forecastHourly.forEach(function (forecastItem) {
-    forecastItem.innerHTML = `${Math.round(forecast2)}°C`;
-  });
+  //let forecastHourly = document.querySelectorAll("#hourly-forecast-temp");
+  //forecastHourly.forEach(function (forecastItem) {
+  // forecastItem.innerHTML = `${Math.round(forecast2)}°C`;
+  //});
 }
 
 //CurrentLocation
