@@ -105,22 +105,8 @@ function displayForecast(response) {
 
   //for (let index = 0; index < 6; index++) {
   forecast = response.data.list[0];
-  forecast2 = forecast.main.temp;
-  console.log(forecast);
-  forecastElement.innerHTML += `<div class="col-2">
-              <span>${formatHours(forecast.dt * 1000)}</span>
-              <img id = "icon" src="http://openweathermap.org/img/wn/${
-                forecast.weather[0].icon
-              }@2x.png" />
-              <div id="hourly-forecast-temp">
-                <span>${Math.round(forecast.main.temp)}°C</span>
-               
-               
-              </div>
-            </div>`;
-
-  forecast = response.data.list[1];
-  console.log(forecast);
+  hourlyForecast = forecast.main.temp;
+  //console.log(forecast);
 
   forecastElement.innerHTML += `<div class="col-2">
               <span>${formatHours(forecast.dt * 1000)}</span>
@@ -134,61 +120,76 @@ function displayForecast(response) {
               </div>
             </div>`;
 
-  forecast = response.data.list[2];
-  console.log(forecast);
+  forecast1 = response.data.list[1];
+  hourlyForecast1 = forecast1.main.temp;
 
   forecastElement.innerHTML += `<div class="col-2">
-              <span>${formatHours(forecast.dt * 1000)}</span>
+              <span>${formatHours(forecast1.dt * 1000)}</span>
               <img id = "icon" src="http://openweathermap.org/img/wn/${
                 forecast.weather[0].icon
               }@2x.png" />
-              <div id="hourly-forecast-temp">
-                <span>${Math.round(forecast.main.temp)}°C</span>
+              <div id="hourly-forecast-temp1">
+                <span>${Math.round(forecast1.main.temp)}°C</span>
                
                
               </div>
             </div>`;
 
-  forecast = response.data.list[3];
-  console.log(forecast);
+  forecast2 = response.data.list[2];
+  hourlyForecast2 = forecast2.main.temp;
 
   forecastElement.innerHTML += `<div class="col-2">
-              <span>${formatHours(forecast.dt * 1000)}</span>
+              <span>${formatHours(forecast2.dt * 1000)}</span>
               <img id = "icon" src="http://openweathermap.org/img/wn/${
                 forecast.weather[0].icon
               }@2x.png" />
-              <div id="hourly-forecast-temp">
-                <span>${Math.round(forecast.main.temp)}°C</span>
+              <div id="hourly-forecast-temp2">
+                <span>${Math.round(forecast2.main.temp)}°C</span>
                
                
               </div>
             </div>`;
 
-  forecast = response.data.list[4];
-  console.log(forecast);
+  forecast3 = response.data.list[3];
+  hourlyForecast3 = forecast3.main.temp;
 
   forecastElement.innerHTML += `<div class="col-2">
-              <span>${formatHours(forecast.dt * 1000)}</span>
+              <span>${formatHours(forecast3.dt * 1000)}</span>
               <img id = "icon" src="http://openweathermap.org/img/wn/${
                 forecast.weather[0].icon
               }@2x.png" />
-              <div id="hourly-forecast-temp">
-                <span>${Math.round(forecast.main.temp)}°C</span>
+              <div id="hourly-forecast-temp3">
+                <span>${Math.round(forecast3.main.temp)}°C</span>
                
                
               </div>
             </div>`;
 
-  forecast = response.data.list[5];
-  console.log(forecast);
+  forecast4 = response.data.list[4];
+  hourlyForecast4 = forecast4.main.temp;
 
   forecastElement.innerHTML += `<div class="col-2">
-              <span>${formatHours(forecast.dt * 1000)}</span>
+              <span>${formatHours(forecast4.dt * 1000)}</span>
               <img id = "icon" src="http://openweathermap.org/img/wn/${
                 forecast.weather[0].icon
               }@2x.png" />
-              <div id="hourly-forecast-temp">
-                <span>${Math.round(forecast.main.temp)}°C</span>
+              <div id="hourly-forecast-temp4">
+                <span>${Math.round(forecast4.main.temp)}°C</span>
+               
+               
+              </div>
+            </div>`;
+
+  forecast5 = response.data.list[5];
+  hourlyForecast5 = forecast5.main.temp;
+
+  forecastElement.innerHTML += `<div class="col-2">
+              <span>${formatHours(forecast5.dt * 1000)}</span>
+              <img id = "icon" src="http://openweathermap.org/img/wn/${
+                forecast.weather[0].icon
+              }@2x.png" />
+              <div id="hourly-forecast-temp5">
+                <span>${Math.round(forecast5.main.temp)}°C</span>
                
                
               </div>
@@ -206,7 +207,7 @@ function displayDailyForecast(response) {
   uviIndexElement.innerHTML = `${Math.round(response.data.current.uvi)}`;
   let popElement = document.querySelector("#pop");
   popElement.innerHTML = `${Math.round(response.data.daily[0].pop)}`;
-  console.log(response);
+  //console.log(response);
 
   //for (let index = 1; index < 7; index++) {
   forecastDaily = response.data.daily[1];
@@ -364,6 +365,25 @@ function fahrenheit(event) {
   )}°F`;
 
   //forecast hourly c to f
+  document.querySelector("#hourly-forecast-temp").innerHTML = `${Math.round(
+    (hourlyForecast * 9) / 5 + 32
+  )}°F`;
+  document.querySelector("#hourly-forecast-temp1").innerHTML = `${Math.round(
+    (hourlyForecast1 * 9) / 5 + 32
+  )}°F`;
+  document.querySelector("#hourly-forecast-temp2").innerHTML = `${Math.round(
+    (hourlyForecast2 * 9) / 5 + 32
+  )}°F`;
+  document.querySelector("#hourly-forecast-temp3").innerHTML = `${Math.round(
+    (hourlyForecast3 * 9) / 5 + 32
+  )}°F`;
+  document.querySelector("#hourly-forecast-temp4").innerHTML = `${Math.round(
+    (hourlyForecast4 * 9) / 5 + 32
+  )}°F`;
+  document.querySelector("#hourly-forecast-temp5").innerHTML = `${Math.round(
+    (hourlyForecast5 * 9) / 5 + 32
+  )}°F`;
+
   // let forecastHourly = document.querySelectorAll("#hourly-forecast-temp");
   //forecastHourly.forEach(function (forecastItem) {
   // forecastItem.innerHTML = `${Math.round(forecast2 * 9) / 5 + 32}°F`;
@@ -439,6 +459,26 @@ function celsius(event) {
   )}°C`;
   document.querySelector("#dailyMin6").innerHTML = `${Math.round(
     forecastDailymin6
+  )}°C`;
+
+  //hourly f to c temp
+  document.querySelector("#hourly-forecast-temp").innerHTML = `${Math.round(
+    hourlyForecast
+  )}°C`;
+  document.querySelector("#hourly-forecast-temp1").innerHTML = `${Math.round(
+    hourlyForecast1
+  )}°C`;
+  document.querySelector("#hourly-forecast-temp2").innerHTML = `${Math.round(
+    hourlyForecast2
+  )}°C`;
+  document.querySelector("#hourly-forecast-temp3").innerHTML = `${Math.round(
+    hourlyForecast3
+  )}°C`;
+  document.querySelector("#hourly-forecast-temp4").innerHTML = `${Math.round(
+    hourlyForecast4
+  )}°C`;
+  document.querySelector("#hourly-forecast-temp5").innerHTML = `${Math.round(
+    hourlyForecast5
   )}°C`;
 
   //daiy forecast max  cel
