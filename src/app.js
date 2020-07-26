@@ -207,7 +207,7 @@ function displayDailyForecast(response) {
   uviIndexElement.innerHTML = `${Math.round(response.data.current.uvi)}`;
   let popElement = document.querySelector("#pop");
   popElement.innerHTML = response.data.daily[0].pop * 100;
-  console.log(response);
+  //console.log(response);
 
   //for (let index = 1; index < 7; index++) {
   forecastDaily = response.data.daily[1];
